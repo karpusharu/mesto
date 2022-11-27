@@ -1,0 +1,8 @@
+.profile__field {
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    justify-content: center;
+    gap: 16px;
+    max-width: 336px;
+}
