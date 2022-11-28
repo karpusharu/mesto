@@ -9,6 +9,6 @@
 }
 
 .photo-grid__like-button:hover {
-    opacity: .8;
+    opacity: .5;
     cursor: pointer;
 }
