@@ -5,12 +5,16 @@
     align-self: center;
     border: 1px solid white;
     padding: 0;
+    transition: opacity .3s ease;
 }
 
 @media screen and (max-width:767px) {
     .profile__add-button {
         margin-top: 34px;
         width: 282px;
-
     }
+}
+
+.profile__add-button:hover {
+    opacity: .8;
 }

@@ -5,4 +5,9 @@
     height: 19px;
     padding-right: 30px;
     align-self: center;
+    transition: opacity .3s ease;
+}
+
+.photo-grid__like-button:hover {
+    opacity: .8;
 }

@@ -4,7 +4,9 @@
     height: 24px;
     border:1px solid white;
     margin-left: 18px;
-    align-self: center;
+    align-self: baseline;
+    display: inline-flex;
+    transition: opacity .3s ease;
 }
 
 @media screen and (max-width:767px) {
@@ -13,4 +15,8 @@
         height: 18px;
         margin-left:12px;
     }
+}
+
+.profile__edit-button:hover {
+    opacity: .8;
 }
