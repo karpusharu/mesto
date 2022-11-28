@@ -1,0 +1,7 @@
+.photo-grid__like-button {
+    border:none;
+    background: url("../../../images/icons/like-logo.png") no-repeat transparent center;
+    width: 22px;
+    height: 19px;
+    padding-right: 30px;
+}

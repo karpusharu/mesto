@@ -1,0 +1,6 @@
+.photo-grid__picture {
+    max-width: 282px;
+    vertical-align: bottom;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}

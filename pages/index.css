@@ -16,11 +16,11 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
 @import url(../blocks/photo-grid/photo-grid.css);
+@import url(../blocks/photo-grid/__picture/photo-grid__picture.css);
+@import url(../blocks/photo-grid/__box/photo-grid__box.css);
 @import url(../blocks/photo-grid/__item/photo-grid__item.css);
-@import url(../blocks);
-@import url(../blocks);
-@import url(../blocks);
-@import url(../blocks);
-@import url(../blocks);
-@import url(../blocks);
+@import url(../blocks/photo-grid/__item-capture/photo-grid__item-capture.css);
+@import url(../blocks/photo-grid/__like-button/photo-grid__like-button.css);
+
+@import url(../blocks/footer/footer.css);
 
