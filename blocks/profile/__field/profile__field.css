@@ -6,3 +6,11 @@
     gap: 10px;
     max-width: 336px;
 }
+
+@media screen and (max-width:767px) {
+    .profile__field {
+        max-width: 282px;
+        padding-left: 19px;
+        gap: 9px;
+    }
+}

@@ -4,3 +4,11 @@
     height: 100%;
     vertical-align: bottom;
 }
+
+@media screen and (max-width:767px) {
+    .logo {
+        padding-left: 27px;
+        padding-bottom: 32px;
+        max-width: 104px;
+    }
+}
