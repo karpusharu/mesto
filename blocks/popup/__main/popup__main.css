@@ -1,0 +1,18 @@
+.popup__main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    max-width: 430px;
+    padding: 35px;
+    color: black;
+    border-radius: 10px;
+}
+
+@media screen and (max-width:767px) {
+    .popup__main {
+        max-width: 282px;
+        padding: 24px 22px 22px;
+    }
+}
