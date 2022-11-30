@@ -13,6 +13,6 @@
     .profile__job-description {
         font-size: 14px;
         line-height: 17px;
-        text-align: center;
+        text-align: start;
     }
 }
