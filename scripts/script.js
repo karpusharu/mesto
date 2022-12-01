@@ -14,9 +14,9 @@ function openPopup() {
     popupBg.classList.add('popup_active');
 }
 
-let formElement = document.querySelector('.popup__main');
-let nameInput = document.querySelector('.popup__input_type-name');
-let jobInput = document.querySelector('.popup__input_type-job');
+let formElement = document.querySelector('.popup__form');
+let nameInput = document.querySelector('.popup__input_type_name');
+let jobInput = document.querySelector('.popup__input_type_job');
 
 
 function handleFormSubmit(evt) {
