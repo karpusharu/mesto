@@ -17,19 +17,19 @@ const btnSaveAddingPicture = document.querySelector('.popup__save-element');
 const btnsClosePopup = document.querySelectorAll('.popup__close-button');
 
 // ** pop-up forms
-const editForm = document.querySelector('.popup_type_edit-profile');
-const addPictureForm = document.querySelector('.popup_type_add-picture');
-const fullSizePictureForm = document.querySelector('.popup_type_full-size-picture');
+const formEdit = document.querySelector('.popup_type_edit-profile');
+const formAddPicture = document.querySelector('.popup_type_add-picture');
+const formFullSizePicture = document.querySelector('.popup_type_full-size-picture');
 
 // ** profile edit fields
-let nameProfile = document.querySelector('.profile__name');
-let jobProfile = document.querySelector('.profile__job-description');
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_job');
+const nameProfile = document.querySelector('.profile__name');
+const jobProfile = document.querySelector('.profile__job-description');
+const inputName = document.querySelector('.popup__input_type_name');
+const inputJob = document.querySelector('.popup__input_type_job');
 
 // ** add picture fields
-let elementName = document.querySelector('.popup__input_type_element-name');
-let elementLink = document.querySelector('.popup__input_type_element-link');
+const elementName = document.querySelector('.popup__input_type_element-name');
+const elementLink = document.querySelector('.popup__input_type_element-link');
 
 // ** photo grid variables
 const photoGridContainer = document.querySelector('.photo-grid');
@@ -63,9 +63,9 @@ function createCard(name, link) {
 // ** Submit profile edit info
 function submitProfileEdit(evt) {
     evt.preventDefault();
-    nameProfile.textContent = nameInput.value;
-    jobProfile.textContent = jobInput.value;
-    closePopup(editForm);
+    nameProfile.textContent = inputName.value;
+    jobProfile.textContent = inputJob.value;
+    closePopup(formEdit);
 }
 
 // ** Close pop-up
@@ -82,7 +82,7 @@ function openPopup(e) {
 function showFullSizePicture(name, link) {
     popupFullSizeImg.src = link;
     popupFullSizeTitle.textContent = name;
-    openPopup(fullSizePictureForm)
+    openPopup(formFullSizePicture)
 }
 
 // ** Delete photo from grid
@@ -105,7 +105,7 @@ btnSaveAddingPicture.addEventListener('click', (e) => {
     createCard(name, link);
     elementLink.value = "";
     elementName.value = "";
-    closePopup(addPictureForm);
+    closePopup(formAddPicture);
 })
 
 // ** close pop-ups when clicking all the cross buttons
@@ -121,12 +121,12 @@ btnSaveProfileEdit.addEventListener('click', submitProfileEdit);
 
 // ** Open edit profile pop-up
 btnEditProfile.addEventListener('click', () => {
-    nameInput.value = nameProfile.textContent;
-    jobInput.value = jobProfile.textContent;
-    openPopup(editForm)
+    inputName.value = nameProfile.textContent;
+    inputJob.value = jobProfile.textContent;
+    openPopup(formEdit)
 });
 
 // ** Open add picture pop-up
 btnAddPicture.addEventListener('click', () => {
-    openPopup(addPictureForm)
+    openPopup(formAddPicture)
 });
