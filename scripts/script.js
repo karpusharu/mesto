@@ -1,14 +1,14 @@
 // *** VARIABLES ***
 
 // ** default pictures
-const initialCards = [
+/*const initialCards = [
     {name: 'Архыз', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
     {name: 'Челябинская область', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
     {name: 'Иваново', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
     {name: 'Камчатка', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
     {name: 'Холмогорский район', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
     {name: 'Байкал', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'}
-];
+];*/
 // ** webpage active buttons
 const btnEditProfile = document.querySelector('.profile__edit-button');
 const btnSaveProfileEdit = document.querySelector('.popup__save-profile-edit');
@@ -37,7 +37,6 @@ const photoTemplate = document.getElementById('photo-item-template').content.que
 const popupFullSizeImg = document.querySelector('.popup__picture');
 const popupFullSizeTitle = document.querySelector('.popup__picture-caption');
 
-
 // *** FUNCTIONS ***
 
 // ** Add element to photo-grid
@@ -51,6 +50,7 @@ function createCard(name, link) {
     cardImg.addEventListener('click', () => showFullSizePicture(name, link));
     cardImg.src = link;
     cardTitle.textContent = name;
+    cardImg.alt = name;
     // ** like button **
     btnLike.addEventListener('click', () => {
         btnLike.classList.toggle('photo-grid__like-button_active')
@@ -74,14 +74,15 @@ function closePopup(item) {
 }
 
 // ** Open pop-up
-function openPopup(e) {
-    e.classList.add('popup_active');
+function openPopup(popup) {
+    popup.classList.add('popup_active');
 }
 
 // ** Showing full size picture function
 function showFullSizePicture(name, link) {
     popupFullSizeImg.src = link;
     popupFullSizeTitle.textContent = name;
+    popupFullSizeImg.alt = name;
     openPopup(formFullSizePicture)
 }
 
@@ -103,9 +104,10 @@ btnSaveAddingPicture.addEventListener('click', (e) => {
     const link = elementLink.value;
     const name = elementName.value;
     createCard(name, link);
-    elementLink.value = "";
-    elementName.value = "";
+    // elementLink.value = "";
+    // elementName.value = "";
     closePopup(formAddPicture);
+    formAddPicture.reset();
 })
 
 // ** close pop-ups when clicking all the cross buttons
