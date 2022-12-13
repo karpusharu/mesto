@@ -13,7 +13,7 @@
     cursor: pointer;
 }
 
-.photo-grid__like-button:active {
+.photo-grid__like-button_active {
     background: url("../../../images/icons/like-logo-active.svg") no-repeat center;
     opacity: 1;
 }

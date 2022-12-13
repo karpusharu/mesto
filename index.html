@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="icon" href="./images/icons/favicon.png">
     <link rel="stylesheet" href="./pages/index.css">
 </head>
+
 <body class="page">
 <header class="header">
     <img class="logo" src="./images/icons/header-logo.svg" alt="Логотип место">
@@ -27,68 +29,67 @@
         <button aria-label="Добавить фотографию в профиль" class="profile__add-button" type="button"></button>
     </section>
     <section class="photo-grid" aria-label="Фотографии пользователя">
-        <figure class="photo-grid__item">
-            <img class="photo-grid__picture" src="./images/karachaevsk-grid.jpg" alt="Вид на разрушенное здание в горах">
-            <figcaption class="photo-grid__box">
-                <h2 class="photo-grid__item-capture">Карачаевск</h2>
-                <button aria-label="Поставить отметку нравится" class="photo-grid__like-button" type="button"></button>
-            </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-            <img class="photo-grid__picture" src="./images/elbrus-grid.jpg" alt="Рассвет на Эльбрусе">
-            <figcaption class="photo-grid__box">
-                <h2 class="photo-grid__item-capture">Эльбрус</h2>
-                <button aria-label="Поставить отметку нравится" class="photo-grid__like-button" type="button"></button>
-            </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-            <img class="photo-grid__picture" src="./images/dagestan-grid.jpg" alt="Экраноплан 'Лунь' в Дербенте">
-            <figcaption class="photo-grid__box">
-                <h2 class="photo-grid__item-capture">Дагестан</h2>
-                <button aria-label="Поставить отметку нравится" class="photo-grid__like-button" type="button"></button>
-            </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-            <img class="photo-grid__picture" src="./images/petersburg-grid.jpg" alt="Вид на главный штаб в Петербурге">
-            <figcaption class="photo-grid__box">
-                <h2 class="photo-grid__item-capture">Санкт-Петербург</h2>
-                <button aria-label="Поставить отметку нравится" class="photo-grid__like-button" type="button"></button>
-            </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-            <img class="photo-grid__picture" src="./images/kamchatka-grid.jpg" alt="Фотография горы в Камчатке">
-            <figcaption class="photo-grid__box">
-                <h2 class="photo-grid__item-capture">Камчатка</h2>
-                <button aria-label="Поставить отметку нравится" class="photo-grid__like-button" type="button"></button>
-            </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-            <img class="photo-grid__picture" src="./images/dombai-grid.jpg" alt="Красивейший вид на гору Домбай">
-            <figcaption class="photo-grid__box">
-                <h2 class="photo-grid__item-capture">Домбай</h2>
-                <button aria-label="Поставить отметку нравится" class="photo-grid__like-button" type="button"></button>
-            </figcaption>
-        </figure>
     </section>
 </main>
-    <footer class="footer">© 2022 Mesto Russia</footer>
-    <div class="popup">
-        <div class="popup__main">
-            <form class="popup__form" name="popupForm">
-                <button class="popup__close-button" type="button"></button>
-                <h3 class="popup__title">Редактировать профиль</h3>
-                <div class="popup__inputs">
-                    <label>
-                        <input class="popup__input popup__input_type_name" placeholder="Ваше имя" type="text" name="name" value="">
-                    </label>
-                    <label>
-                        <input class="popup__input popup__input_type_job" placeholder="Ваша профессия" type="text" name="job" value="">
-                    </label>
-                </div>
-                <button aria-label="Сохранить изменения" class="popup__save-button" type="submit">Сохранить</button>
-            </form>
-        </div>
+<footer class="footer">© 2022 Mesto Russia</footer>
+
+<div class="popup popup_type_edit-profile">
+    <div class="popup__main">
+        <form class="popup__form" name="popupForm">
+            <button class="popup__close-button" type="button"></button>
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <div class="popup__inputs">
+                <label>
+                    <input class="popup__input popup__input_type_name" placeholder="Ваше имя" type="text" name="name" value="">
+                </label>
+                <label>
+                    <input class="popup__input popup__input_type_job" placeholder="Ваша профессия" type="text" name="job" value="">
+                </label>
+            </div>
+            <button aria-label="Сохранить изменения" class="popup__save popup__save-profile-edit" type="submit">Сохранить</button>
+        </form>
     </div>
+</div>
+
+<div class="popup popup_type_add-picture">
+    <div class="popup__main">
+        <form class="popup__form" name="popupForm">
+            <button class="popup__close-button" type="button"></button>
+            <h3 class="popup__title">Новое место</h3>
+            <div class="popup__inputs">
+                <label>
+                    <input class="popup__input popup__input_type_element-name" placeholder="Название" type="text" name="name" value="">
+                </label>
+                <label>
+                    <input class="popup__input popup__input_type_element-link" placeholder="Ссылка на картинку" type="text" name="link" value="">
+                </label>
+            </div>
+            <button aria-label="Сохранить изменения" class="popup__save popup__save-element" type="submit">Сохранить</button>
+        </form>
+    </div>
+</div>
+
+<div class="popup popup_type_full-size-picture">
+    <figure class="popup__picture-container">
+        <button class="popup__close-button" type="button"></button>
+        <img class ="popup__picture" src="" alt="">
+        <figcaption>
+            <h2 class="popup__picture-caption"></h2>
+        </figcaption>
+    </figure>
+</div>
+
+<template id="photo-item-template">
+    <figure class="photo-grid__item">
+        <img class="photo-grid__delete-picture" src="images/icons/delete.svg" alt="удалить изображение">
+        <img class="photo-grid__picture" src="" alt="">
+        <figcaption class="photo-grid__box">
+            <h2 class="photo-grid__item-capture"></h2>
+            <button aria-label="Поставить отметку нравится" class="photo-grid__like-button" type="button"></button>
+        </figcaption>
+    </figure>
+</template>
 <script src="scripts/script.js"></script>
 </body>
+
 </html>
