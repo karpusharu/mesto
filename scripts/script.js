@@ -1,19 +1,8 @@
 // *** VARIABLES ***
 
-// ** default pictures
-/*const initialCards = [
-    {name: 'Архыз', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
-    {name: 'Челябинская область', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
-    {name: 'Иваново', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
-    {name: 'Камчатка', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
-    {name: 'Холмогорский район', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
-    {name: 'Байкал', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'}
-];*/
 // ** webpage active buttons
 const btnEditProfile = document.querySelector('.profile__edit-button');
-const btnSaveProfileEdit = document.querySelector('.popup__save-profile-edit');
 const btnAddPicture = document.querySelector('.profile__add-button');
-const btnSaveAddingPicture = document.querySelector('.popup__save-element');
 const btnsClosePopup = document.querySelectorAll('.popup__close-button');
 
 // ** pop-up forms
@@ -38,8 +27,7 @@ const popupFullSizeImg = document.querySelector('.popup__picture');
 const popupFullSizeTitle = document.querySelector('.popup__picture-caption');
 
 // *** FUNCTIONS ***
-
-// ** Add element to photo-grid
+// ** create photo card element
 function createCard(name, link) {
     const cardElement = photoTemplate.cloneNode(true);
     const cardImg = cardElement.querySelector('.photo-grid__picture');
@@ -57,7 +45,12 @@ function createCard(name, link) {
     });
     // ** delete picture **
     btnDeleteElement.addEventListener('click', deleteCard);
-    photoGridContainer.prepend(cardElement);
+    return cardElement;
+}
+
+// ** Add element to photo-grid
+function renderCard(name, link){
+    photoGridContainer.prepend(createCard(name, link));
 }
 
 // ** Submit profile edit info
@@ -95,31 +88,30 @@ function deleteCard(e) {
 
 // ** Getting name and link from the default array
 initialCards.forEach(({name, link}) => {
-    createCard(name, link)
+    renderCard(name, link)
 })
 
 // ** Add pictures
-btnSaveAddingPicture.addEventListener('click', (e) => {
+formAddPicture.addEventListener('submit', (e) => {
     e.preventDefault()
     const link = elementLink.value;
     const name = elementName.value;
     createCard(name, link);
-    // elementLink.value = "";
-    // elementName.value = "";
+    elementLink.value = "";
+    elementName.value = "";
     closePopup(formAddPicture);
-    formAddPicture.reset();
 })
 
 // ** close pop-ups when clicking all the cross buttons
 btnsClosePopup.forEach(button => {
+    const popup = button.closest('.popup')
     button.addEventListener('click', () => {
-        const popup = button.closest('.popup')
         closePopup(popup)
     })
 })
 
 // ** save all changes in profile edit when click save button
-btnSaveProfileEdit.addEventListener('click', submitProfileEdit);
+formEdit.addEventListener('submit', submitProfileEdit);
 
 // ** Open edit profile pop-up
 btnEditProfile.addEventListener('click', () => {
