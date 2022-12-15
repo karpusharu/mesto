@@ -96,7 +96,7 @@ formAddPicture.addEventListener('submit', (e) => {
     e.preventDefault()
     const link = elementLink.value;
     const name = elementName.value;
-    createCard(name, link);
+    renderCard(name, link);
     elementLink.value = "";
     elementName.value = "";
     closePopup(formAddPicture);
