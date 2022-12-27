@@ -1,5 +1,5 @@
 // *** VARIABLES ***
-
+const popupList = document.querySelectorAll('.popup');
 // ** webpage active buttons
 const btnEditProfile = document.querySelector('.profile__edit-button');
 const btnAddPicture = document.querySelector('.profile__add-button');
@@ -7,7 +7,12 @@ const btnsClosePopup = document.querySelectorAll('.popup__close-button');
 
 // ** pop-up forms
 const formEdit = document.querySelector('.popup_type_edit-profile');
+const inputsEditForm = Array.from(formEdit.querySelectorAll('.popup__input'));
+const btnSubmitEditForm = formEdit.querySelector('.popup__button-profile-edit');
+
 const formAddPicture = document.querySelector('.popup_type_add-picture');
+const inputsAddPictureForm = Array.from(formAddPicture.querySelectorAll('.popup__input'));
+const btnSubmitAddPictureForm = formAddPicture.querySelector('.popup__button-element');
 const formFullSizePicture = document.querySelector('.popup_type_full-size-picture');
 
 // ** profile edit fields
@@ -17,8 +22,8 @@ const inputName = document.querySelector('.popup__input_type_name');
 const inputJob = document.querySelector('.popup__input_type_job');
 
 // ** add picture fields
-const elementName = document.querySelector('.popup__input_type_element-name');
-const elementLink = document.querySelector('.popup__input_type_element-link');
+const inputPictureName = document.querySelector('.popup__input_type_element-name');
+const inputPictureLink = document.querySelector('.popup__input_type_element-link');
 
 // ** photo grid variables
 const photoGridContainer = document.querySelector('.photo-grid');
@@ -61,14 +66,27 @@ function submitProfileEdit(evt) {
     closePopup(formEdit);
 }
 
-// ** Close pop-up
-function closePopup(item) {
-    item.classList.remove('popup_active');
+// ** Close active popup when pressing Escape button
+function closePopupEscape (evt) {
+    if(evt.key === 'Escape'){
+        popupList.forEach(popup => {
+            if(popup.classList.contains('popup_active')) {
+                closePopup(popup)
+            }
+        })
+    }
 }
 
 // ** Open pop-up
 function openPopup(popup) {
     popup.classList.add('popup_active');
+    document.addEventListener('keydown', closePopupEscape);
+}
+
+// ** Close pop-up
+function closePopup(popup) {
+    popup.classList.remove('popup_active');
+    document.removeEventListener('keydown', closePopupEscape);
 }
 
 // ** Showing full size picture function
@@ -80,8 +98,8 @@ function showFullSizePicture(name, link) {
 }
 
 // ** Delete photo from grid
-function deleteCard(e) {
-    e.target.closest('.photo-grid__item').remove()
+function deleteCard(evt) {
+    evt.target.closest('.photo-grid__item').remove()
 }
 
 // *** EVENT HANDLERS ***
@@ -92,13 +110,14 @@ initialCards.forEach(({name, link}) => {
 })
 
 // ** Add pictures
-formAddPicture.addEventListener('submit', (e) => {
-    e.preventDefault()
-    const link = elementLink.value;
-    const name = elementName.value;
+formAddPicture.addEventListener('submit', (evt) => {
+    evt.preventDefault()
+    const link = inputPictureLink.value;
+    const name = inputPictureName.value;
     renderCard(name, link);
-    elementLink.value = "";
-    elementName.value = "";
+    inputPictureLink.value = "";
+    inputPictureName.value = "";
+    toggleButtonState(inputsAddPictureForm, btnSubmitAddPictureForm, validationConfig);
     closePopup(formAddPicture);
 })
 
@@ -108,7 +127,16 @@ btnsClosePopup.forEach(button => {
     button.addEventListener('click', () => {
         closePopup(popup)
     })
-})
+});
+// ** close pop-ups when clicking overlays
+popupList.forEach((popup) => {
+
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_active')) {
+            closePopup(popup)
+        }
+    });
+});
 
 // ** save all changes in profile edit when click save button
 formEdit.addEventListener('submit', submitProfileEdit);
@@ -117,6 +145,7 @@ formEdit.addEventListener('submit', submitProfileEdit);
 btnEditProfile.addEventListener('click', () => {
     inputName.value = nameProfile.textContent;
     inputJob.value = jobProfile.textContent;
+    toggleButtonState(inputsEditForm, btnSubmitEditForm, validationConfig);
     openPopup(formEdit)
 });
 

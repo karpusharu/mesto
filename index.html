@@ -35,32 +35,36 @@
 
 <div class="popup popup_type_edit-profile">
     <div class="popup__main">
-        <form class="popup__form" name="popupForm">
+        <form class="popup__form" name="popupForm" novalidate>
             <button class="popup__close-button" type="button"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
             <div class="popup__inputs">
-                    <input class="popup__input popup__input_type_name" placeholder="Ваше имя" type="text" name="name" value="">
-                    <input class="popup__input popup__input_type_job" placeholder="Ваша профессия" type="text" name="job" value="">
+                <input id="profile-name" class="popup__input popup__input_type_name" placeholder="Ваше имя" type="text" name="name" value="" minlength="2" maxlength="40" required>
+                <span class="profile-name-error popup__input_error"></span>
+                <input id="profile-profession" class="popup__input popup__input_type_job" placeholder="Ваша профессия" type="text" name="job" value="" minlength="2" maxlength="200" required>
+                <span class="profile-profession-error popup__input_error"></span>
             </div>
-            <button aria-label="Сохранить изменения" class="popup__save popup__save-profile-edit" type="submit">Сохранить</button>
+            <button aria-label="Сохранить изменения" class="popup__button popup__button-profile-edit" type="submit">Сохранить</button>
         </form>
     </div>
 </div>
 
 <div class="popup popup_type_add-picture">
     <div class="popup__main">
-        <form class="popup__form" name="popupForm">
+        <form class="popup__form" name="popupForm" novalidate>
             <button class="popup__close-button" type="button"></button>
             <h3 class="popup__title">Новое место</h3>
             <div class="popup__inputs">
                 <label>
-                    <input class="popup__input popup__input_type_element-name" placeholder="Название" type="text" name="name" value="">
+                    <input id="picture-name" class="popup__input popup__input_type_element-name" placeholder="Название" type="text" name="name" value="" minlength="2" maxlength="30" required>
+                    <span class="picture-name-error popup__input_error"></span>
                 </label>
                 <label>
-                    <input class="popup__input popup__input_type_element-link" placeholder="Ссылка на картинку" type="text" name="link" value="">
+                    <input id="picture-link" class="popup__input popup__input_type_element-link" placeholder="Ссылка на картинку" type="url" name="link" value="" required>
+                    <span class="picture-link-error popup__input_error"></span>
                 </label>
             </div>
-            <button aria-label="Сохранить изменения" class="popup__save popup__save-element" type="submit">Сохранить</button>
+            <button aria-label="Сохранить изменения" class="popup__button popup__button-element" type="submit">Сохранить</button>
         </form>
     </div>
 </div>
@@ -85,6 +89,7 @@
         </figcaption>
     </figure>
 </template>
+<script src="scripts/validate.js"></script>
 <script src="scripts/cards.js"></script>
 <script src="scripts/script.js"></script>
 </body>
