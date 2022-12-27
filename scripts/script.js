@@ -87,6 +87,7 @@ function openPopup(popup) {
 function closePopup(popup) {
     popup.classList.remove('popup_active');
     document.removeEventListener('keydown', closePopupEscape);
+    deleteValidationErrors(formEdit, inputsEditForm, validationConfig);
 }
 
 // ** Showing full size picture function
@@ -118,6 +119,7 @@ formAddPicture.addEventListener('submit', (evt) => {
     inputPictureLink.value = "";
     inputPictureName.value = "";
     toggleButtonState(inputsAddPictureForm, btnSubmitAddPictureForm, validationConfig);
+
     closePopup(formAddPicture);
 })
 
@@ -128,9 +130,9 @@ btnsClosePopup.forEach(button => {
         closePopup(popup)
     })
 });
+
 // ** close pop-ups when clicking overlays
 popupList.forEach((popup) => {
-
     popup.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains('popup_active')) {
             closePopup(popup)
