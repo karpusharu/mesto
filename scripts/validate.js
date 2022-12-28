@@ -57,6 +57,12 @@ function setEventListeners(formElement, config){
     const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
     toggleButtonState(inputList, buttonElement, config);
+// *** Deactivating submit button when resetting form
+    formElement.addEventListener('reset', () => {
+        setTimeout(() => {
+            toggleButtonState(inputList, buttonElement, config);
+        }, 0);
+    });
 
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {

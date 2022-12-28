@@ -3,7 +3,6 @@ const popupList = document.querySelectorAll('.popup');
 // ** webpage active buttons
 const btnEditProfile = document.querySelector('.profile__edit-button');
 const btnAddPicture = document.querySelector('.profile__add-button');
-const btnsClosePopup = document.querySelectorAll('.popup__close-button');
 
 // ** pop-up forms
 const formEdit = document.querySelector('.popup_type_edit-profile');
@@ -11,8 +10,6 @@ const inputsEditForm = Array.from(formEdit.querySelectorAll('.popup__input'));
 const btnSubmitEditForm = formEdit.querySelector('.popup__button-profile-edit');
 
 const formAddPicture = document.querySelector('.popup_type_add-picture');
-const inputsAddPictureForm = Array.from(formAddPicture.querySelectorAll('.popup__input'));
-const btnSubmitAddPictureForm = formAddPicture.querySelector('.popup__button-element');
 const formFullSizePicture = document.querySelector('.popup_type_full-size-picture');
 
 // ** profile edit fields
@@ -87,7 +84,6 @@ function openPopup(popup) {
 function closePopup(popup) {
     popup.classList.remove('popup_active');
     document.removeEventListener('keydown', closePopupEscape);
-    deleteValidationErrors(formEdit, inputsEditForm, validationConfig);
 }
 
 // ** Showing full size picture function
@@ -116,35 +112,28 @@ formAddPicture.addEventListener('submit', (evt) => {
     const link = inputPictureLink.value;
     const name = inputPictureName.value;
     renderCard(name, link);
-    inputPictureLink.value = "";
-    inputPictureName.value = "";
-    toggleButtonState(inputsAddPictureForm, btnSubmitAddPictureForm, validationConfig);
-
+    evt.target.reset();
     closePopup(formAddPicture);
 })
 
-// ** close pop-ups when clicking all the cross buttons
-btnsClosePopup.forEach(button => {
-    const popup = button.closest('.popup')
-    button.addEventListener('click', () => {
-        closePopup(popup)
-    })
-});
-
-// ** close pop-ups when clicking overlays
+// ** close pop-ups when clicking all the cross buttons and overlays
 popupList.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains('popup_active')) {
             closePopup(popup)
         }
-    });
-});
+        if (evt.target.classList.contains('popup__close-button')) {
+            closePopup(popup)
+        }
+    })
+})
 
 // ** save all changes in profile edit when click save button
 formEdit.addEventListener('submit', submitProfileEdit);
 
 // ** Open edit profile pop-up
 btnEditProfile.addEventListener('click', () => {
+    deleteValidationErrors(formEdit, inputsEditForm, validationConfig);
     inputName.value = nameProfile.textContent;
     inputJob.value = jobProfile.textContent;
     toggleButtonState(inputsEditForm, btnSubmitEditForm, validationConfig);
