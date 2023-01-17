@@ -1,3 +1,8 @@
+// *** IMPORTS ***
+import {Card} from "./Card.js";
+import {FormValidator} from "./FormValidator.js";
+import {initialCards, validationConfig} from "./initialObjects.js";
+
 // *** VARIABLES ***
 const popupList = document.querySelectorAll('.popup');
 // ** webpage active buttons
@@ -6,8 +11,6 @@ const btnAddPicture = document.querySelector('.profile__add-button');
 
 // ** pop-up forms
 const formEdit = document.querySelector('.popup_type_edit-profile');
-const inputsEditForm = Array.from(formEdit.querySelectorAll('.popup__input'));
-const btnSubmitEditForm = formEdit.querySelector('.popup__button-profile-edit');
 
 const formAddPicture = document.querySelector('.popup_type_add-picture');
 const formFullSizePicture = document.querySelector('.popup_type_full-size-picture');
@@ -28,39 +31,33 @@ const photoTemplate = document.getElementById('photo-item-template').content.que
 const popupFullSizeImg = document.querySelector('.popup__picture');
 const popupFullSizeTitle = document.querySelector('.popup__picture-caption');
 
+// ** FormValidator class instances
+const profileFormValidation = new FormValidator(validationConfig, formEdit);
+const cardFormValidation = new FormValidator(validationConfig, formAddPicture);
+
+
+// ** Enable forms validation
+profileFormValidation.enableValidation();
+cardFormValidation.enableValidation();
 // *** FUNCTIONS ***
+// ** open full size picture popup when clicking on card
+function handleClick (name, link){
+    popupFullSizeImg.src = link;
+    popupFullSizeTitle.textContent = name;
+    popupFullSizeImg.alt = name;
+    openPopup(formFullSizePicture)
+}
+
+// ** generate cards from initialCards array
+initialCards.forEach((item) => {
+    const cardElement = new Card(item, photoTemplate, handleClick).generateCard();
+    // adding to DOM
+    photoGridContainer.prepend(cardElement);
+});
+
 // ** create photo card element
-function createCard(name, link) {
-    const cardElement = photoTemplate.cloneNode(true);
-    const cardImg = cardElement.querySelector('.photo-grid__picture');
-    const cardTitle = cardElement.querySelector('.photo-grid__item-capture');
-    const btnLike = cardElement.querySelector('.photo-grid__like-button');
-    const btnDeleteElement = cardElement.querySelector('.photo-grid__delete-picture');
-    // ** open full-size picture **
-    cardImg.addEventListener('click', () => showFullSizePicture(name, link));
-    cardImg.src = link;
-    cardTitle.textContent = name;
-    cardImg.alt = name;
-    // ** like button **
-    btnLike.addEventListener('click', () => {
-        btnLike.classList.toggle('photo-grid__like-button_active')
-    });
-    // ** delete picture **
-    btnDeleteElement.addEventListener('click', deleteCard);
-    return cardElement;
-}
-
-// ** Add element to photo-grid
-function renderCard(name, link){
-    photoGridContainer.prepend(createCard(name, link));
-}
-
-// ** Submit profile edit info
-function submitProfileEdit(evt) {
-    evt.preventDefault();
-    nameProfile.textContent = inputName.value;
-    jobProfile.textContent = inputJob.value;
-    closePopup(formEdit);
+function createCard (item) {
+    return new Card(item, photoTemplate, handleClick).generateCard();
 }
 
 // ** Close active popup when pressing Escape button
@@ -86,32 +83,12 @@ function closePopup(popup) {
     document.removeEventListener('keydown', closePopupEscape);
 }
 
-// ** Showing full size picture function
-function showFullSizePicture(name, link) {
-    popupFullSizeImg.src = link;
-    popupFullSizeTitle.textContent = name;
-    popupFullSizeImg.alt = name;
-    openPopup(formFullSizePicture)
-}
-
-// ** Delete photo from grid
-function deleteCard(evt) {
-    evt.target.closest('.photo-grid__item').remove()
-}
-
 // *** EVENT HANDLERS ***
-
-// ** Getting name and link from the default array
-initialCards.forEach(({name, link}) => {
-    renderCard(name, link)
-})
-
-// ** Add pictures
+// ** Add element to photo-grid
 formAddPicture.addEventListener('submit', (evt) => {
-    evt.preventDefault()
-    const link = inputPictureLink.value;
-    const name = inputPictureName.value;
-    renderCard(name, link);
+    evt.preventDefault();
+
+    photoGridContainer.prepend(createCard({name:inputPictureName.value, link:inputPictureLink.value}));
     evt.target.reset();
     closePopup(formAddPicture);
 })
@@ -129,14 +106,19 @@ popupList.forEach((popup) => {
 })
 
 // ** save all changes in profile edit when click save button
-formEdit.addEventListener('submit', submitProfileEdit);
+formEdit.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    nameProfile.textContent = inputName.value;
+    jobProfile.textContent = inputJob.value;
+    closePopup(formEdit);
+});
 
 // ** Open edit profile pop-up
 btnEditProfile.addEventListener('click', () => {
-    deleteValidationErrors(formEdit, inputsEditForm, validationConfig);
+    profileFormValidation.deleteValidationErrors();
     inputName.value = nameProfile.textContent;
     inputJob.value = jobProfile.textContent;
-    toggleButtonState(inputsEditForm, btnSubmitEditForm, validationConfig);
+    profileFormValidation.disableSubmitButton();
     openPopup(formEdit)
 });
 
