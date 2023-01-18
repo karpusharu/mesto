@@ -33,9 +33,17 @@ class FormValidator {
 
     // Переключает состояние кнопки, если какое-либо поле ввода невалидно
     _toggleButtonState = () => {
-        this._inputList.some((inputElement) => !inputElement.validity.valid) ?
-            this._buttonElement.classList.add(this._config.inactiveButtonClass) :
-            this._buttonElement.classList.remove(this._config.inactiveButtonClass)
+        this._inputList.some((inputElement) => {
+            if (!inputElement.validity.valid)
+            {
+                this._buttonElement.classList.add(this._config.inactiveButtonClass);
+                this._buttonElement.disabled = true;
+            } else {
+                this._buttonElement.classList.remove(this._config.inactiveButtonClass);
+                this._buttonElement.disabled = false;
+            }
+        })
+
     }
 
     _setEventListeners = () => {
@@ -58,9 +66,7 @@ class FormValidator {
 
     deleteValidationErrors = () => {
         this._inputList.forEach((inputElement) => {
-            this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-            inputElement.classList.remove(this._config.inputErrorClass);
-            this._errorElement.classList.remove(this._config.errorClass)
+            this._hideInputError(inputElement)
         })
     }
 

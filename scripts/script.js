@@ -1,7 +1,7 @@
 // *** IMPORTS ***
 import {Card} from "./Card.js";
 import {FormValidator} from "./FormValidator.js";
-import {initialCards, validationConfig} from "./initialObjects.js";
+import {initialCards, validationConfig} from "./constants.js";
 
 // *** VARIABLES ***
 const popupList = document.querySelectorAll('.popup');
@@ -40,6 +40,10 @@ const cardFormValidation = new FormValidator(validationConfig, formAddPicture);
 profileFormValidation.enableValidation();
 cardFormValidation.enableValidation();
 // *** FUNCTIONS ***
+//** insert card to grid container
+function insertCard (card) {
+    photoGridContainer.prepend(createCard(card));
+}
 // ** open full size picture popup when clicking on card
 function handleClick (name, link){
     popupFullSizeImg.src = link;
@@ -48,16 +52,9 @@ function handleClick (name, link){
     openPopup(formFullSizePicture)
 }
 
-// ** generate cards from initialCards array
-initialCards.forEach((item) => {
-    const cardElement = new Card(item, photoTemplate, handleClick).generateCard();
-    // adding to DOM
-    photoGridContainer.prepend(cardElement);
-});
-
 // ** create photo card element
-function createCard (item) {
-    return new Card(item, photoTemplate, handleClick).generateCard();
+function createCard (card) {
+    return new Card(card, photoTemplate, handleClick).generateCard();
 }
 
 // ** Close active popup when pressing Escape button
@@ -84,11 +81,14 @@ function closePopup(popup) {
 }
 
 // *** EVENT HANDLERS ***
+// ** generate cards from initialCards array and adding to DOM
+initialCards.forEach(card => insertCard(card));
+
 // ** Add element to photo-grid
 formAddPicture.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    photoGridContainer.prepend(createCard({name:inputPictureName.value, link:inputPictureLink.value}));
+    insertCard({name:inputPictureName.value, link:inputPictureLink.value});
     evt.target.reset();
     closePopup(formAddPicture);
 })

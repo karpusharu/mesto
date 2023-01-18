@@ -33,7 +33,7 @@ class Card {
     }
 
     _delete = () => {
-        this._btnDeleteCard.closest('.photo-grid__item').remove()
+        this._element.closest('.photo-grid__item').remove()
     }
 }
 export {Card};
