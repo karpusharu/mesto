@@ -1,12 +1,12 @@
 class Card {
     constructor(data, template, handleClick) {
         this._data = data;
-        this._template = template;
+        this._template = document.getElementById(template).content;
         this._handleClick = handleClick;
     }
 // ** create photo card element
     generateCard = () => {
-        this._element = this._template.cloneNode(true);
+        this._element = this._template.querySelector('.photo-grid__item').cloneNode(true);
         this._cardImg = this._element.querySelector('.photo-grid__picture');
         this._cardTitle = this._element.querySelector('.photo-grid__item-capture');
         this._btnLikeCard = this._element.querySelector('.photo-grid__like-button');
@@ -33,7 +33,8 @@ class Card {
     }
 
     _delete = () => {
-        this._element.closest('.photo-grid__item').remove()
+        this._element.remove()
+        this._element = null;
     }
 }
 export {Card};

@@ -27,7 +27,6 @@ const inputPictureLink = document.querySelector('.popup__input_type_element-link
 
 // ** photo grid variables
 const photoGridContainer = document.querySelector('.photo-grid');
-const photoTemplate = document.getElementById('photo-item-template').content.querySelector('.photo-grid__item');
 const popupFullSizeImg = document.querySelector('.popup__picture');
 const popupFullSizeTitle = document.querySelector('.popup__picture-caption');
 
@@ -41,11 +40,11 @@ profileFormValidation.enableValidation();
 cardFormValidation.enableValidation();
 // *** FUNCTIONS ***
 //** insert card to grid container
-function insertCard (card) {
-    photoGridContainer.prepend(createCard(card));
+function insertCard (container, card) {
+    container.prepend(createCard(card));
 }
 // ** open full size picture popup when clicking on card
-function handleClick (name, link){
+function handleCardClick (name, link){
     popupFullSizeImg.src = link;
     popupFullSizeTitle.textContent = name;
     popupFullSizeImg.alt = name;
@@ -54,7 +53,7 @@ function handleClick (name, link){
 
 // ** create photo card element
 function createCard (card) {
-    return new Card(card, photoTemplate, handleClick).generateCard();
+    return new Card(card, 'photo-item-template', handleCardClick).generateCard();
 }
 
 // ** Close active popup when pressing Escape button
@@ -82,13 +81,13 @@ function closePopup(popup) {
 
 // *** EVENT HANDLERS ***
 // ** generate cards from initialCards array and adding to DOM
-initialCards.forEach(card => insertCard(card));
+initialCards.forEach(card => insertCard(photoGridContainer, card));
 
 // ** Add element to photo-grid
 formAddPicture.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    insertCard({name:inputPictureName.value, link:inputPictureLink.value});
+    insertCard(photoGridContainer,{name:inputPictureName.value, link:inputPictureLink.value});
     evt.target.reset();
     closePopup(formAddPicture);
 })
