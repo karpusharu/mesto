@@ -7,17 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Местограм</title>
     <link rel="icon" href="./images/icons/favicon.png">
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="page">
 <header class="header">
-    <img class="logo" src="./images/icons/header-logo.svg" alt="Логотип место">
+    <img class="logo" src="<%=require('./images/icons/header-logo.svg')%>" alt="Логотип место">
 </header>
 <main class="content">
     <section class="profile">
         <div class="profile__info">
-            <img class="profile__picture" src="./images/kusto.jpg" alt="Главное фото профиля">
+            <img class="profile__picture" src="<%=require('./images/kusto.jpg')%>" alt="Главное фото профиля">
             <div class="profile__field">
                 <div class="profile__block">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -81,7 +80,7 @@
 
 <template id="photo-item-template">
     <figure class="photo-grid__item">
-        <img class="photo-grid__delete-picture" src="images/icons/delete.svg" alt="удалить изображение">
+        <img class="photo-grid__delete-picture" src="<%=require('./images/icons/delete.svg')%>" alt="удалить изображение">
         <img class="photo-grid__picture" src="#" alt="">
         <figcaption class="photo-grid__box">
             <h2 class="photo-grid__item-capture"></h2>
@@ -89,7 +88,6 @@
         </figcaption>
     </figure>
 </template>
-<script src="scripts/script.js" type="module"></script>
 </body>
 
 </html>
