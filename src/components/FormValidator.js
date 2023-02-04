@@ -40,7 +40,7 @@ export default class FormValidator {
   };
 
   // Переключает состояние кнопки, если какое-либо поле ввода невалидно
-  _toggleButtonState = () => {
+  toggleButtonState = () => {
     this._inputList.some((inputElement) => {
       if (!inputElement.validity.valid) {
         this._buttonElement.classList.add(this._config.inactiveButtonClass);
@@ -52,25 +52,22 @@ export default class FormValidator {
     });
   };
 
+  deleteValidationErrors = () => {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+  };
+
   _setEventListeners = () => {
-    this._toggleButtonState();
+    this.toggleButtonState();
     // для каждого инпута проверяем валидность и в с лучае невалидности выводим ошибку
     //также проверяем состояние кнопки если все поля валидны
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
-  };
-
-  checkButtonAndInputsState = () => {
-    // спрятать ошибки всех инпутов
-    this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement);
-    });
-    // проверить состояние кнопки
-    this._toggleButtonState();
   };
 
   enableValidation = () => {
