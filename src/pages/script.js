@@ -71,15 +71,14 @@ section.renderItems();
 
 // ** Open edit profile pop-up
 btnEditProfile.addEventListener("click", () => {
-  profileFormValidation.deleteValidationErrors();
   profileEditPopup.setInputValues(userInfo.getUserInfo());
-  profileFormValidation.disableSubmitButton();
+  profileFormValidation.checkButtonAndInputsState();
   profileEditPopup.open();
 });
 
 // ** Open add picture pop-up
 btnAddPicture.addEventListener("click", () => {
-  cardFormValidation.deleteValidationErrors();
+  cardFormValidation.checkButtonAndInputsState();
   pictureAddPopup.open();
 });
 

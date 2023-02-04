@@ -54,12 +54,6 @@ export default class FormValidator {
 
   _setEventListeners = () => {
     this._toggleButtonState();
-    // отключать кнопку когда добавили картинку и открыли форму заново
-    this._formElement.addEventListener("reset", () => {
-      setTimeout(() => {
-        this._toggleButtonState();
-      }, 0);
-    });
     // для каждого инпута проверяем валидность и в с лучае невалидности выводим ошибку
     //также проверяем состояние кнопки если все поля валидны
     this._inputList.forEach((inputElement) => {
@@ -70,13 +64,12 @@ export default class FormValidator {
     });
   };
 
-  deleteValidationErrors = () => {
+  checkButtonAndInputsState = () => {
+    // спрятать ошибки всех инпутов
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
-  };
-
-  disableSubmitButton = () => {
+    // проверить состояние кнопки
     this._toggleButtonState();
   };
 
